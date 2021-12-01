@@ -1,3 +1,3 @@
 vacationapi:
-  resource: "@EvrinomaVacationBundleBundle/Resources/config/routing/api.yml"
+  resource: "@EvrinomaVacationBundle/Resources/config/routing/api.yml"
   prefix: evrinoma
