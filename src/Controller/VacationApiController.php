@@ -67,7 +67,6 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *             @OA\Schema(
      *               example={
      *                  "class":"Evrinoma\VacationBundle\Dto\VacationApiDto",
-     *                  "id":"48",
      *                  "author":"2",
      *                  "status":"2",
      *                  "resolved_by":"3",
