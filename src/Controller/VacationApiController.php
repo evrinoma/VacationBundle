@@ -68,7 +68,7 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *               example={
      *                  "class":"Evrinoma\VacationBundle\Dto\VacationApiDto",
      *                  "author":"2",
-     *                  "status":"2",
+     *                  "status":"created",
      *                  "resolved_by":"3",
      *                  "request_created_at":"2020-08-09T12:57:13.506Z",
      *                  "vacation_start_date":"2020-08-24T00:00:00.000Z",
@@ -127,7 +127,7 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *                  "class":"Evrinoma\VacationBundle\Dto\VacationApiDto",
      *                  "id":"48",
      *                  "author":"2",
-     *                  "status":"2",
+     *                  "status":"approved",
      *                  "resolved_by":"3",
      *                  "request_created_at":"2020-08-09T12:57:13.506Z",
      *                  "vacation_start_date":"2020-08-24T00:00:00.000Z",
@@ -263,8 +263,8 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *         in="query",
      *         description="Start range",
      *         @OA\Schema(
-     *           type="number",
-     *           default="1637935744"
+     *           type="string",
+     *           default="2021-09-04T00:00:00.000Z"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -272,8 +272,8 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *         in="query",
      *         description="End range",
      *         @OA\Schema(
-     *           type="number",
-     *           default="1647935744"
+     *           type="string",
+     *           default="2021-09-04T00:00:00.000Z"
      *         )
      *     )
      * )
