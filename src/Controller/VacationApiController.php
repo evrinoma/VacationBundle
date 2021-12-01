@@ -83,7 +83,7 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *               @OA\Property(property="resolved_by",type="string"),
      *               @OA\Property(property="request_created_at",type="string"),
      *               @OA\Property(property="vacation_start_date",type="string"),
-     *               @OA\Property(property="vacation_start_date",type="string")
+     *               @OA\Property(property="vacation_end_date",type="string")
      *            )
      *         )
      *     )
@@ -142,7 +142,7 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *               @OA\Property(property="resolved_by",type="string"),
      *               @OA\Property(property="request_created_at",type="string"),
      *               @OA\Property(property="vacation_start_date",type="string"),
-     *               @OA\Property(property="vacation_start_date",type="string")
+     *               @OA\Property(property="vacation_end_date",type="string")
      *            )
      *         )
      *     )
@@ -258,19 +258,6 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *         @OA\Schema(
      *           type="string",
      *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="type[identity]",
-     *         in="query",
-     *         description="Type Identity",
-     *         @OA\Schema(
-     *              type="array",
-     *              @OA\Items(
-     *                  type="string",
-     *                  ref=@Model(type=Evrinoma\VacationBundle\Form\Rest\TypeChoiceType::class, options={"data":"identity"})
-     *              ),
-     *          ),
-     *         style="form"
      *     ),
      *     @OA\Parameter(
      *         name="range[from]",
