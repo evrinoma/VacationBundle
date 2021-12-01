@@ -1,0 +1,5 @@
+services:
+  evrinoma.vacation.object_manager:
+    class:  Doctrine\Persistence\ObjectManager
+    public: false
+    arguments: ['%evrinoma.vacation.model_manager_name%']

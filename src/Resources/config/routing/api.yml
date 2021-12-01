@@ -1,0 +1,7 @@
+vacation_vacation_api:
+  resource: "@EvrinomaVacationBundle/Controller/VacationApiController.php"
+  type: annotation
+
+#vacation_api:
+#  resource: "@EvrinomaVacationBundle/Controller/ApiController.php"
+#  type: annotation
