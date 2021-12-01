@@ -1,3 +1,3 @@
-exchange_rateapi:
-  resource: "@EvrinomaExchangeRateBundle/Resources/config/routing/api.yml"
+vacationapi:
+  resource: "@EvrinomaVacationBundleBundle/Resources/config/routing/api.yml"
   prefix: evrinoma
