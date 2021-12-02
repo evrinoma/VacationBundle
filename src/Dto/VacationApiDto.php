@@ -18,22 +18,24 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
      * @Dto(class="Evrinoma\VacationBundle\Dto\RangeApiDto", generator="genRequestRangeApiDto")
      * @var RangeApiDto|null
      */
-    private ?RangeApiDto        $rangeApiDto = null;
-    private ?\DateTimeImmutable $createdAt   = null;
-    private ?string             $user        = null;
-    private ?string             $status      = null;
-    private ?string             $resolver    = null;
+    private ?RangeApiDto $rangeApiDto = null;
+    /**
+     * @Dto(class="Evrinoma\VacationBundle\Dto\UserApiDto", generator="genRequestAuthorApiDto")
+     * @var UserApiDto|null
+     */
+    private ?UserApiDto $user = null;
+    /**
+     * @var string|null
+     */
+    private ?string $status = null;
+    /**
+     * @Dto(class="Evrinoma\VacationBundle\Dto\UserApiDto", generator="genRequestResolvedApiDto")
+     * @var UserApiDto|null
+     */
+    private ?UserApiDto $resolver = null;
 //endregion Fields
 
 //region SECTION: Public
-    /**
-     * @return bool
-     */
-    public function hasCreatedAt(): bool
-    {
-        return $this->createdAt !== null;
-    }
-
     /**
      * @return bool
      */
@@ -72,14 +74,7 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
         return $this;
     }
 
-    private function setCreatedAt(\DateTimeImmutable $createdAt): VacationApiDtoInterface
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    private function setResolver(string $resolver): VacationApiDtoInterface
+    public function setResolver(UserApiDtoInterface $resolver): VacationApiDtoInterface
     {
         $this->resolver = $resolver;
 
@@ -94,7 +89,7 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
 
     }
 
-    private function setUser(string $user): VacationApiDtoInterface
+    public function setUser(UserApiDtoInterface $user): VacationApiDtoInterface
     {
         $this->user = $user;
 
@@ -109,31 +104,17 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
 
         if ($class === $this->getClass()) {
 
-            $id        = $request->get(ModelInterface::ID);
-            $user      = $request->get(ModelInterface::AUTHOR);
-            $status    = $request->get(ModelInterface::STATUS);
-            $resolver  = $request->get(ModelInterface::RESOLVED_BY);
-            $createdAt = $request->get(ModelInterface::CREATED_AT);
+            $id     = $request->get(ModelInterface::ID);
+            $status = $request->get(ModelInterface::STATUS);
 
             if ($id) {
                 $this->setId($id);
-            }
-
-            if ($user) {
-                $this->setUser($user);
             }
 
             if ($status) {
                 $this->setStatus($status);
             }
 
-            if ($resolver) {
-                $this->setResolver($resolver);
-            }
-
-            if ($createdAt) {
-                $this->setCreatedAt((new \DateTimeImmutable)->setTimestamp((int)$createdAt));
-            }
         }
 
         return $this;
@@ -145,11 +126,50 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
     public function genRequestRangeApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $type = $request->get('range');
-            if ($type) {
+            $dateStart = $request->get(ModelInterface::DATE_START);
+            $dateEnd   = $request->get(ModelInterface::DATE_END);
+            if ($dateStart && $dateEnd) {
+                $newRequest                        = $this->getCloneRequest();
+                $range[DtoInterface::DTO_CLASS]    = RangeApiDto::class;
+                $range[ModelInterface::DATE_START] = $dateStart;
+                $range[ModelInterface::DATE_END]   = $dateEnd;
+                $newRequest->request->add($range);
+
+                yield $newRequest;
+            }
+        }
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function genRequestAuthorApiDto(?Request $request): ?\Generator
+    {
+        if ($request) {
+            $author = $request->get(ModelInterface::AUTHOR);
+            if ($author) {
                 $newRequest                    = $this->getCloneRequest();
-                $type[DtoInterface::DTO_CLASS] = RangeApiDto::class;
-                $newRequest->request->add($type);
+                $user[DtoInterface::DTO_CLASS] = UserApiDto::class;
+                $user[ModelInterface::AUTHOR]  = $author;
+                $newRequest->request->add($user);
+
+                yield $newRequest;
+            }
+        }
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function genRequestResolvedApiDto(?Request $request): ?\Generator
+    {
+        if ($request) {
+            $resolver = $request->get(ModelInterface::RESOLVED_BY);
+            if ($resolver) {
+                $newRequest                        = $this->getCloneRequest();
+                $user[DtoInterface::DTO_CLASS]     = UserApiDto::class;
+                $user[ModelInterface::RESOLVED_BY] = $resolver;
+                $newRequest->request->add($user);
 
                 yield $newRequest;
             }
@@ -187,17 +207,9 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
 
 //region SECTION: Getters/Setters
     /**
-     * @return \DateTimeImmutable
-     */
-    public function getCreatedAt(): \DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    /**
      * @return bool
      */
-    public function getResolver(): bool
+    public function getResolver(): UserApiDtoInterface
     {
         return $this->resolver;
     }
@@ -205,15 +217,15 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
     /**
      * @return bool
      */
-    public function getUser(): bool
+    public function getUser(): UserApiDtoInterface
     {
         return $this->user;
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function getStatus(): bool
+    public function getStatus(): string
     {
         return $this->status;
     }

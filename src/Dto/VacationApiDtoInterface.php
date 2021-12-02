@@ -22,11 +22,6 @@ interface VacationApiDtoInterface extends DtoInterface, IdInterface
      * @return bool
      */
     public function hasResolver(): bool;
-
-    /**
-     * @return bool
-     */
-    public function hasCreatedAt(): bool;
 //endregion Public
 
 //region SECTION: Dto
@@ -43,24 +38,19 @@ interface VacationApiDtoInterface extends DtoInterface, IdInterface
 
 //region SECTION: Getters/Setters
     /**
-     * @return bool
+     * @return string
      */
-    public function getStatus(): bool;
+    public function getStatus(): string;
 
     /**
-     * @return bool
+     * @return UserApiDtoInterface
      */
-    public function getUser(): bool;
+    public function getUser(): UserApiDtoInterface;
 
     /**
-     * @return bool
+     * @return UserApiDtoInterface
      */
-    public function getResolver(): bool;
-
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getCreatedAt(): \DateTimeImmutable;
+    public function getResolver(): UserApiDtoInterface;
 //endregion Getters/Setters
 
 }

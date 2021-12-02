@@ -51,11 +51,11 @@ class RangeApiDto extends AbstractDto implements RangeApiDtoInterface
             $end   = $request->get(ModelInterface::DATE_END);
             
             if ($start) {
-                $this->setStart((new \DateTimeImmutable)->setTimestamp((int)$start));
+                $this->setStart(new \DateTimeImmutable($start));
             }
 
             if ($end) {
-                $this->setEnd((new \DateTimeImmutable)->setTimestamp((int)$end));
+                $this->setEnd(new \DateTimeImmutable($end));
             }
         }
 
