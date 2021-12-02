@@ -21,7 +21,7 @@ class EvrinomaVacationExtension extends Extension
     public const ENTITY               = 'Evrinoma\VacationBundle\Entity';
     public const FACTORY_VACATION     = 'Evrinoma\VacationBundle\Factory\VacationFactory';
     public const ENTITY_BASE_VACATION = self::ENTITY.'\Vacation\BaseVacation';
-    public const ENTITY_BASE_USER     = self::ENTITY.'\Vacation\BaseUser';
+    public const ENTITY_BASE_USER     = self::ENTITY.'\User\BaseUser';
     public const DTO_BASE_VACATION    = VacationApiDto::class;
 
     /**
@@ -81,6 +81,7 @@ class EvrinomaVacationExtension extends Extension
 
         if ($doctrineRegistry) {
             $this->wireRepository($container, $doctrineRegistry, 'vacation', $config['entity_vacation']);
+            $this->wireRepository($container, $doctrineRegistry, 'user', $config['entity_user']);
         }
 
         $this->wireController($container, 'vacation', $config['dto_vacation']);
@@ -140,12 +141,17 @@ class EvrinomaVacationExtension extends Extension
 
     private function wireRepository(ContainerBuilder $container, Reference $doctrineRegistry, string $name, string $class): void
     {
-        $definitionRepository    = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.repository');
-        $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
-        $definitionRepository->setArgument(2, $definitionQueryMediator);
-        $definitionRepository->setArgument(1, $class);
-        $definitionRepository->setArgument(0, $doctrineRegistry);
+        $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.repository');
 
+        switch ($name) {
+            case 'vacation':
+                $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
+                $definitionRepository->setArgument(2, $definitionQueryMediator);
+            case 'user':
+                $definitionRepository->setArgument(1, $class);
+            default:
+                $definitionRepository->setArgument(0, $doctrineRegistry);
+        }
         $array = $definitionRepository->getArguments();
         ksort($array);
         $definitionRepository->setArguments($array);

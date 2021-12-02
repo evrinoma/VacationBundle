@@ -1,0 +1,12 @@
+services:
+  evrinoma.vacation.user.repository:
+    class: Evrinoma\VacationBundle\Repository\User\UserRepository
+    public: true
+    arguments:
+
+  evrinoma.vacation.user.query.manager:
+    class: Evrinoma\VacationBundle\Manager\User\QueryManager
+    arguments:
+      - '@evrinoma.vacation.user.repository'
+
+

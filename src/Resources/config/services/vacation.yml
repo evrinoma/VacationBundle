@@ -30,6 +30,7 @@ services:
       - '@evrinoma.vacation.vacation.repository'
       - '@evrinoma.vacation.vacation.factory'
       - '@evrinoma.vacation.vacation.command.mediator'
+      - '@evrinoma.vacation.user.query.manager'
 
   evrinoma.vacation.vacation.query.manager:
     class: Evrinoma\VacationBundle\Manager\Vacation\QueryManager
