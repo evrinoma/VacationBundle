@@ -15,11 +15,11 @@ use Evrinoma\VacationBundle\Manager\Vacation\CommandManagerInterface;
 use Evrinoma\VacationBundle\Manager\Vacation\QueryManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Nelmio\ApiDocBundle\Annotation\Model;
 
 final class VacationApiController extends AbstractApiController implements ApiControllerInterface
 {
@@ -69,7 +69,7 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *                  "class":"Evrinoma\VacationBundle\Dto\VacationApiDto",
      *                  "author":"2",
      *                  "status":"pending",
-     *                  "resolved_by":"3",
+     *                  "resolved_by":"4",
      *                  "request_created_at":"2020-08-09T12:57:13.506Z",
      *                  "vacation_start_date":"2020-08-24T00:00:00.000Z",
      *                  "vacation_end_date":"2020-09-04T00:00:00.000Z",
@@ -128,7 +128,7 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *                  "id":"48",
      *                  "author":"2",
      *                  "status":"approved",
-     *                  "resolved_by":"3",
+     *                  "resolved_by":"4",
      *                  "request_created_at":"2020-08-09T12:57:13.506Z",
      *                  "vacation_start_date":"2020-08-24T00:00:00.000Z",
      *                  "vacation_end_date":"2020-09-04T00:00:00.000Z",
@@ -289,7 +289,7 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="range[vacation_start_date]",
+     *         name="vacation_start_date",
      *         in="query",
      *         description="Start range",
      *         @OA\Schema(
@@ -298,7 +298,7 @@ final class VacationApiController extends AbstractApiController implements ApiCo
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="range[vacation_end_date]",
+     *         name="vacation_end_date",
      *         in="query",
      *         description="End range",
      *         @OA\Schema(
