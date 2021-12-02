@@ -1,0 +1,6 @@
+jms_serializer:
+  metadata:
+    directories:
+      VacationBundle:
+        namespace_prefix: "Evrinoma\\VacationBundle"
+        path: '%kernel.root_dir%/Resources/config/serializer/VacationBundle'

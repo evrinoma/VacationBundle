@@ -1,0 +1,2 @@
+vacation:
+    resource: "@EvrinomaVacationBundle/Resources/config/routes.yml"
