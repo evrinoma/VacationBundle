@@ -22,7 +22,7 @@ abstract class AbstractVacation implements VacationInterface
     /**
      * @var UserVacationInterface
      *
-     * @ORM\ManyToOne(targetEntity="Evrinoma\VacationBundle\Model\Define\UserVacationInterface")
+     * @ORM\ManyToOne(targetEntity="Evrinoma\VacationBundle\Model\User\VacationInterface")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected UserVacationInterface $user;
@@ -30,7 +30,7 @@ abstract class AbstractVacation implements VacationInterface
     /**
      * @var UserVacationInterface
      *
-     * @ORM\ManyToOne(targetEntity="Evrinoma\VacationBundle\Model\Define\UserVacationInterface")
+     * @ORM\ManyToOne(targetEntity="Evrinoma\VacationBundle\Model\User\VacationInterface")
      * @ORM\JoinColumn(name="resolver_id", referencedColumnName="id")
      */
     protected UserVacationInterface $resolver;
