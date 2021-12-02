@@ -1,6 +1,5 @@
 #Configuration
 
-
 Overriding the regular entity class
 
     contractor:
@@ -9,6 +8,11 @@ Overriding the regular entity class
         factory_vacation: App\Vacation\Factory\VacationFactory - factory for creating Vacation objects, missing values can be resolved at the Mediator level or by overriding the factory
         entity_vacation: App\Vacation\Entity\Vacation - overriding entity class
         dto_vacation: App\Vacation\Dto\VacationDto - the dto class the entity is working with
+        entity_user: References on Real User for example App\Entity\User
+        constraints_vacation: enable/disable predefined constrains
+        decorates:
+            command_vacation: custom command decorator
+            query_vacation: custom query decorator
 
 #CQRS model
 
