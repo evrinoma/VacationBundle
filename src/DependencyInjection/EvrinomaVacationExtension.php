@@ -3,6 +3,7 @@
 namespace Evrinoma\VacationBundle\DependencyInjection;
 
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
+use Evrinoma\VacationBundle\DependencyInjection\Compiler\Constraint\VacationPass;
 use Evrinoma\VacationBundle\Dto\VacationApiDto;
 use Evrinoma\VacationBundle\EvrinomaVacationBundle;
 use Symfony\Component\Config\FileLocator;
@@ -114,7 +115,13 @@ class EvrinomaVacationExtension extends Extension
 //region SECTION: Private
     private function wireConstraintTag(ContainerBuilder $container): void
     {
-
+        foreach ($container->getDefinitions() as $key => $definition) {
+            switch (true) {
+                case strpos($key, VacationPass::VACATION_VACATION_CONSTRAINT) !== false :
+                    $definition->addTag(VacationPass::VACATION_VACATION_CONSTRAINT);
+                    break;
+            }
+        }
     }
 
     private function wireFactory(ContainerBuilder $container, string $name, string $class, string $paramClass): void
