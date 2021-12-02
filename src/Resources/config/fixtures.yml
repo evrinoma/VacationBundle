@@ -1,1 +1,7 @@
 services:
+
+  evrinoma.vacation.fixtures.user:
+    class: Evrinoma\VacationBundle\Fixtures\UserFixtures
+    tags:
+      - { name: doctrine.fixture.orm }
+

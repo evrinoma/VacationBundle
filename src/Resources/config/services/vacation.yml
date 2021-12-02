@@ -1,0 +1,76 @@
+services:
+  Evrinoma\VacationBundle\Controller\VacationApiController:
+    alias: evrinoma.vacation.vacation.api.controller
+    public: true
+
+  evrinoma.vacation.vacation.api.controller:
+    class: Evrinoma\VacationBundle\Controller\VacationApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+      - '@evrinoma.vacation.vacation.command.manager'
+      - '@evrinoma.vacation.vacation.query.manager'
+    autowire: true
+
+  evrinoma.vacation.vacation.factory:
+    class: Evrinoma\VacationBundle\Factory\VacationFactory
+    public: true
+    arguments:
+
+  evrinoma.vacation.vacation.repository:
+    class: Evrinoma\VacationBundle\Repository\Vacation\VacationRepository
+    public: true
+    arguments:
+
+  evrinoma.vacation.vacation.command.manager:
+    class: Evrinoma\VacationBundle\Manager\Vacation\CommandManager
+    arguments:
+      - '@evrinoma.vacation.vacation.validator'
+      - '@evrinoma.vacation.vacation.repository'
+      - '@evrinoma.vacation.vacation.factory'
+      - '@evrinoma.vacation.vacation.command.mediator'
+
+  evrinoma.vacation.vacation.query.manager:
+    class: Evrinoma\VacationBundle\Manager\Vacation\QueryManager
+    arguments:
+      - '@evrinoma.vacation.vacation.repository'
+
+  evrinoma.vacation.vacation.validator:
+    class: Evrinoma\VacationBundle\Validator\VacationValidator
+    public: true
+    arguments:
+
+  Evrinoma\VacationBundle\Validator\VacationValidator:
+    alias: evrinoma.vacation.vacation.validator
+
+  evrinoma.vacation.vacation.command.mediator:
+    class: Evrinoma\VacationBundle\Mediator\Vacation\CommandMediator
+    public: true
+    arguments:
+
+  Evrinoma\VacationBundle\Mediator\Vacation\CommandMediator:
+    alias: eevrinoma.vacation.vacation.command.mediator
+
+  Evrinoma\VacationBundle\Mediator\Vacation\CommandMediatorInterface:
+    alias: evrinoma.vacation.vacation.command.mediator
+
+  evrinoma.vacation.vacation.query.mediator:
+    class: Evrinoma\VacationBundle\Mediator\Vacation\QueryMediator
+    public: true
+    arguments:
+
+  Evrinoma\VacationBundle\Mediator\Vacation\QueryMediator:
+    alias: evrinoma.vacation.vacation.query.mediator
+
+  Evrinoma\VacationBundle\Mediator\Vacation\QueryMediatorInterface:
+    alias: evrinoma.vacation.vacation.query.mediator
+
+  evrinoma.vacation.form.rest.vacation:
+    class: Evrinoma\VacationBundle\Form\Vacation\StatusChoiceType
+    tags: { - name: form.type }
+
+  Evrinoma\VacationBundle\Form\Vacation\StatusChoiceType:
+    alias: evrinoma.vacation.form.rest.vacation
+    public: true
+
