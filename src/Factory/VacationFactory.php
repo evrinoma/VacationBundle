@@ -22,6 +22,8 @@ final class VacationFactory implements VacationFactoryInterface
         $rate
             ->setStatus()
             ->setCreatedAt(new \DateTimeImmutable())
+            ->setDateStart($dto->getRangeApiDto()->getStart())
+            ->setDateFinish($dto->getRangeApiDto()->getEnd())
         ;
 
         return $rate;
