@@ -16,11 +16,11 @@ use Evrinoma\VacationBundle\Tests\Functional\CaseTest;
 class VacationApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiMethodTestInterface
 {
 //region SECTION: Fields
-    public const API_GET      = 'evrinoma/api/exchange_rate/rate';
-    public const API_CRITERIA = 'evrinoma/api/exchange_rate/rate/criteria';
-    public const API_DELETE   = 'evrinoma/api/exchange_rate/rate/delete';
-    public const API_PUT      = 'evrinoma/api/exchange_rate/rate/save';
-    public const API_POST     = 'evrinoma/api/exchange_rate/rate/create';
+    public const API_GET      = 'evrinoma/api/vacation/vacation';
+    public const API_CRITERIA = 'evrinoma/api/vacation/vacation/criteria';
+    public const API_DELETE   = 'evrinoma/api/vacation/vacation/delete';
+    public const API_PUT      = 'evrinoma/api/vacation/vacation/save';
+    public const API_POST     = 'evrinoma/api/vacation/vacation/create';
 //endregion Fields
 
     use ApiBrowserTestTrait, ApiMethodTestTrait, ResponseStatusTestTrait;
@@ -31,15 +31,15 @@ class VacationApiControllerTest extends CaseTest implements ApiControllerTestInt
 //region SECTION: Public
     public static function defaultData(): array
     {
-      return [
+        return [
             'author'              => '2',
             'status'              => 'pending',
-            'resolved_by'         => '3',
+            'resolved_by'         => '4',
             'request_created_at'  => '2020-08-09T12:57:13.506Z',
             'vacation_start_date' => '2020-08-24T00:00:00.000Z',
             'vacation_end_date'   => '2020-09-04T00:00:00.000Z',
-            'id'    => '48',
-            'class' => static::getDtoClass(),
+            'id'                  => '48',
+            'class'               => static::getDtoClass(),
         ];
 
     }
