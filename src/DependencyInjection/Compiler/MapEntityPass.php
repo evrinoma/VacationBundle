@@ -33,6 +33,8 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
         if ((strpos($entityUser, EvrinomaVacationExtension::ENTITY) !== false)) {
             $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/User', '%s/Entity/User');
             $this->addResolveTargetEntity([BaseUser::class => UserVacationInterface::class,], false);
+        } else {
+            $this->addResolveTargetEntity([$entityUser => UserVacationInterface::class,], false);
         }
 
         $entityVacation = $container->getParameter('evrinoma.'.EvrinomaVacationBundle::VACATION_BUNDLE.'.entity_vacation');
