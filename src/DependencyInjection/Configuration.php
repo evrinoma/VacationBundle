@@ -33,6 +33,7 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->scalarNode('factory_vacation')->cannotBeEmpty()->defaultValue(EvrinomaVacationExtension::FACTORY_VACATION)->end()
             ->scalarNode('entity_vacation')->cannotBeEmpty()->defaultValue(EvrinomaVacationExtension::ENTITY_BASE_VACATION)->end()
+            ->scalarNode('entity_user')->cannotBeEmpty()->defaultValue(EvrinomaVacationExtension::ENTITY_BASE_USER)->end()
             ->scalarNode('constraints_vacation')->defaultTrue()->info('This option is used for enable/disable basic vacation constraints')->end()
             ->scalarNode('dto_vacation')->cannotBeEmpty()->defaultValue(EvrinomaVacationExtension::DTO_BASE_VACATION)->info('This option is used for dto class override')->end()
             ->arrayNode('decorates')->addDefaultsIfNotSet()->children()

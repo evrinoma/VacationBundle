@@ -17,9 +17,11 @@ class EvrinomaVacationExtension extends Extension
 {
     use HelperTrait;
 
-    public const ENTITY           = 'Evrinoma\VacationBundle\Entity';
+//region SECTION: Fields
+    public const ENTITY               = 'Evrinoma\VacationBundle\Entity';
     public const FACTORY_VACATION     = 'Evrinoma\VacationBundle\Factory\VacationFactory';
     public const ENTITY_BASE_VACATION = self::ENTITY.'\Vacation\BaseVacation';
+    public const ENTITY_BASE_USER     = self::ENTITY.'\Vacation\BaseUser';
     public const DTO_BASE_VACATION    = VacationApiDto::class;
 
     /**
@@ -31,6 +33,8 @@ class EvrinomaVacationExtension extends Extension
             'tag'      => 'doctrine.event_subscriber',
         ),
     );
+//endregion Fields
+
 //region SECTION: Public
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -68,8 +72,9 @@ class EvrinomaVacationExtension extends Extension
             $config,
             [
                 '' => [
-                    'db_driver'   => 'evrinoma.'.$this->getAlias().'.storage',
+                    'db_driver'       => 'evrinoma.'.$this->getAlias().'.storage',
                     'entity_vacation' => 'evrinoma.'.$this->getAlias().'.entity_vacation',
+                    'entity_user'     => 'evrinoma.'.$this->getAlias().'.entity_user',
                 ],
             ]
         );
@@ -103,7 +108,9 @@ class EvrinomaVacationExtension extends Extension
             );
         }
     }
+//endregion Public
 
+//region SECTION: Private
     private function wireConstraintTag(ContainerBuilder $container): void
     {
 
@@ -143,8 +150,7 @@ class EvrinomaVacationExtension extends Extension
         ksort($array);
         $definitionRepository->setArguments($array);
     }
-//endregion Public
-
+//endregion Private
 
 //region SECTION: Getters/Setters
     public function getAlias()
