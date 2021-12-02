@@ -1,12 +1,13 @@
 <?php
 
-namespace Evrinoma\VacationBundle\Constraint\Property\Vacation;
+
+namespace Evrinoma\VacationBundle\Constraint\Properties\Vacation;
 
 use Evrinoma\UtilsBundle\Constraint\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-final class User implements ConstraintInterface
+final class CreatedAt implements ConstraintInterface
 {
 //region SECTION: Getters/Setters
     public function getConstraints(): array
@@ -19,7 +20,7 @@ final class User implements ConstraintInterface
 
     public function getPropertyName(): string
     {
-        return 'user';
+        return 'createdAt';
     }
 //endregion Getters/Setters
 }

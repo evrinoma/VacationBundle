@@ -1,6 +1,6 @@
 <?php
 
-namespace Evrinoma\VacationBundle\Constraint\Property\Vacation;
+namespace Evrinoma\VacationBundle\Constraint\Properties\Vacation;
 
 use Evrinoma\UtilsBundle\Constraint\ConstraintInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;

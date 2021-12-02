@@ -1,17 +1,17 @@
 services:
   evrinoma.vacation.constraint.vacation.created_at:
-    class: Evrinoma\VacationBundle\Constraint\Property\Vacation\CreatedAt
+    class: Evrinoma\VacationBundle\Constraint\Properties\Vacation\CreatedAt
 
   evrinoma.vacation.constraint.vacation.date_finish:
-    class: Evrinoma\VacationBundle\Constraint\Property\Vacation\DateFinish
+    class: Evrinoma\VacationBundle\Constraint\Properties\Vacation\DateFinish
 
   evrinoma.vacation.constraint.vacation.date_start:
-    class: Evrinoma\VacationBundle\Constraint\Property\Vacation\DateStart
+    class: Evrinoma\VacationBundle\Constraint\Properties\Vacation\DateStart
 
   evrinoma.vacation.constraint.vacation.resolver:
-    class: Evrinoma\VacationBundle\Constraint\Property\Vacation\Resolver
+    class: Evrinoma\VacationBundle\Constraint\Properties\Vacation\Resolver
 
   evrinoma.vacation.constraint.vacation.user:
-    class: Evrinoma\VacationBundle\Constraint\Property\Vacation\User
+    class: Evrinoma\VacationBundle\Constraint\Properties\Vacation\User
 
 
