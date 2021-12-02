@@ -12,6 +12,7 @@ use Evrinoma\VacationBundle\Exception\Vacation\VacationCannotBeSavedException;
 use Evrinoma\VacationBundle\Exception\Vacation\VacationInvalidException;
 use Evrinoma\VacationBundle\Exception\Vacation\VacationNotFoundException;
 use Evrinoma\VacationBundle\Factory\VacationFactoryInterface;
+use Evrinoma\VacationBundle\Manager\User\QueryManagerInterface as UserQueryManagerInterface;
 use Evrinoma\VacationBundle\Mediator\Vacation\CommandMediatorInterface;
 use Evrinoma\VacationBundle\Model\Vacation\VacationInterface;
 use Evrinoma\VacationBundle\Repository\Vacation\VacationCommandRepositoryInterface;
@@ -25,6 +26,7 @@ final class CommandManager implements CommandManagerInterface, RestInterface
     private ValidatorInterface                 $validator;
     private VacationFactoryInterface           $factory;
     private CommandMediatorInterface           $mediator;
+    private UserQueryManagerInterface          $userQueryManager;
 //endregion Fields
 
 //region SECTION: Constructor
@@ -33,13 +35,15 @@ final class CommandManager implements CommandManagerInterface, RestInterface
      * @param VacationCommandRepositoryInterface $repository
      * @param VacationFactoryInterface           $factory
      * @param CommandMediatorInterface           $mediator
+     * @param UserQueryManagerInterface          $userQueryManager
      */
-    public function __construct(ValidatorInterface $validator, VacationCommandRepositoryInterface $repository, VacationFactoryInterface $factory, CommandMediatorInterface $mediator)
+    public function __construct(ValidatorInterface $validator, VacationCommandRepositoryInterface $repository, VacationFactoryInterface $factory, CommandMediatorInterface $mediator, UserQueryManagerInterface $userQueryManager)
     {
-        $this->validator  = $validator;
-        $this->repository = $repository;
-        $this->factory    = $factory;
-        $this->mediator   = $mediator;
+        $this->validator        = $validator;
+        $this->repository       = $repository;
+        $this->factory          = $factory;
+        $this->mediator         = $mediator;
+        $this->userQueryManager = $userQueryManager;
     }
 //endregion Constructor
 
@@ -53,7 +57,23 @@ final class CommandManager implements CommandManagerInterface, RestInterface
      */
     public function post(VacationApiDtoInterface $dto): VacationInterface
     {
+        if (!$dto->hasRangeApiDto()) {
+            throw new VacationCannotBeCreatedException();
+        }
+
         $vacation = $this->factory->create($dto);
+
+        try {
+            $vacation->setUser($this->userQueryManager->proxy($dto->getUser()));
+        } catch (\Exception $e) {
+            throw new VacationCannotBeCreatedException($e->getMessage());
+        }
+
+        try {
+            $vacation->setResolver($this->userQueryManager->proxy($dto->getResolver()));
+        } catch (\Exception $e) {
+            throw new VacationCannotBeCreatedException($e->getMessage());
+        }
 
         $this->mediator->onCreate($dto, $vacation);
 
@@ -87,8 +107,28 @@ final class CommandManager implements CommandManagerInterface, RestInterface
             throw $e;
         }
 
+        if (!$dto->hasRangeApiDto()) {
+            throw new VacationCannotBeSavedException();
+        }
+
+        try {
+            $vacation->setUser($this->userQueryManager->proxy($dto->getUser()));
+        } catch (\Exception $e) {
+            throw new VacationCannotBeSavedException($e->getMessage());
+        }
+
+        try {
+            $vacation->setResolver($this->userQueryManager->proxy($dto->getResolver()));
+        } catch (\Exception $e) {
+            throw new VacationCannotBeSavedException($e->getMessage());
+        }
+
         $vacation
-            ->setUpdatedAt(new \DateTimeImmutable());
+            ->setDateStart($dto->getRangeApiDto()->getStart())
+            ->setDateFinish($dto->getRangeApiDto()->getEnd())
+            ->setUpdatedAt(new \DateTimeImmutable())
+            ->setStatus($dto->getStatus())
+        ;
 
         $this->mediator->onUpdate($dto, $vacation);
 

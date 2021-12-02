@@ -3,11 +3,12 @@
 namespace Evrinoma\VacationBundle\Manager\User;
 
 
-
 use Evrinoma\UtilsBundle\Rest\RestInterface;
 use Evrinoma\UtilsBundle\Rest\RestTrait;
+use Evrinoma\VacationBundle\Dto\UserApiDtoInterface;
 use Evrinoma\VacationBundle\Exception\User\UserProxyException;
 use Evrinoma\VacationBundle\Model\User\VacationInterface;
+use Evrinoma\VacationBundle\Repository\User\UserQueryRepositoryInterface;
 
 
 final class QueryManager implements QueryManagerInterface, RestInterface
@@ -36,7 +37,7 @@ final class QueryManager implements QueryManagerInterface, RestInterface
     {
         try {
             if ($dto->hasId()) {
-                $vacation = $this->repository->proxy((string)$dto->getId());
+                $user = $this->repository->proxy((string)$dto->getId());
             } else {
                 throw new UserProxyException('entity does\'t have id');
             }
@@ -44,7 +45,7 @@ final class QueryManager implements QueryManagerInterface, RestInterface
             throw $e;
         }
 
-        return $vacation;
+        return $user;
     }
 //endregion Public
 
