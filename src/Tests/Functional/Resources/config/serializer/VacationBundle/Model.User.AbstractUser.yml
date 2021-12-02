@@ -1,0 +1,13 @@
+Evrinoma\VacationBundle\Model\User\AbstractUser:
+  exclusion_policy: ALL
+  properties:
+    id:
+      groups: [
+          api_get_vacation, api_post_vacation, api_put_vacation
+      ]
+      expose: true
+    identity:
+      groups: [
+          api_get_vacation, api_post_vacation, api_put_vacation
+      ]
+      expose: true

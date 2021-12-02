@@ -47,6 +47,7 @@ class VacationApiControllerTest extends CaseTest implements ApiControllerTestInt
     public function testPost(): void
     {
         $this->createVacation();
+      //  var_dump($this->client->getResponse()->getContent());
         $this->testResponseStatusCreated();
     }
 
