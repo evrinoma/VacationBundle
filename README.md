@@ -1,4 +1,4 @@
-#Configuration
+# Configuration
 
 Overriding the regular entity class
 
@@ -14,7 +14,7 @@ Overriding the regular entity class
             command_vacation: custom command decorator
             query_vacation: custom query decorator
 
-#CQRS model
+# CQRS model
 
 Actions in the controller are split into two groups
 creating, editing, deleting data
@@ -38,7 +38,7 @@ serialization groups
     2. api_post_vacation - create vacation
     3. api_put_vacation - edit vacation
 
-#Status:
+# Status:
 
     VACATION
     
@@ -57,7 +57,7 @@ serialization groups
         if vacations cannot be saved VacationCannotBeSavedException returns HTTP_NOT_IMPLEMENTED 501
         all other errors are returned as HTTP_BAD_REQUEST 400
 
-#Test:
+# Test:
 
     composer install --dev
     /usr/bin/php vendor/phpunit/phpunit/phpunit --bootstrap src/Tests/bootstrap.php --configuration phpunit.xml.dist src/Tests --teamcity
