@@ -10,10 +10,9 @@ use Evrinoma\TestUtilsBundle\Helper\ApiMethodTestTrait;
 use Evrinoma\TestUtilsBundle\Helper\ResponseStatusTestTrait;
 use Evrinoma\VacationBundle\Dto\VacationApiDto;
 use Evrinoma\VacationBundle\Fixtures\FixtureInterface;
-use Evrinoma\VacationBundle\Tests\Functional\CaseTest;
+use Evrinoma\TestUtilsBundle\Web\AbstractWebCaseTest;
 
-
-class VacationApiControllerTest extends CaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiMethodTestInterface
+class VacationApiControllerTest extends AbstractWebCaseTest implements ApiControllerTestInterface, ApiBrowserTestInterface, ApiMethodTestInterface
 {
 //region SECTION: Fields
     public const API_GET      = 'evrinoma/api/vacation/vacation';
