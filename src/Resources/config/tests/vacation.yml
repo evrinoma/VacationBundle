@@ -1,0 +1,10 @@
+services:
+  evrinoma.vacation.test.functional.action.vacation:
+    class: Evrinoma\VacationBundle\Tests\Functional\Action\BaseVacation
+    public: true
+    arguments:
+
+  Evrinoma\VacationBundle\Tests\Functional\Action\BaseVacation:
+    alias: evrinoma.vacation.test.functional.action.vacation
+    public: true
+
