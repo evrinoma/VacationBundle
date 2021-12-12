@@ -46,6 +46,10 @@ class EvrinomaVacationExtension extends Extension
             $loader->load('fixtures.yml');
         }
 
+        if ($container->getParameter('kernel.environment') === 'test') {
+            $loader->load('tests.yml');
+        }
+
         $configuration = $this->getConfiguration($configs, $container);
         $config        = $this->processConfiguration($configuration, $configs);
 
