@@ -3,11 +3,12 @@
 namespace Evrinoma\VacationBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\IdInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\IdInterface;
 
 interface VacationApiDtoInterface extends DtoInterface, IdInterface
 {
 //region SECTION: Public
+    public const STATUS      = 'status';
     /**
      * @return bool
      */

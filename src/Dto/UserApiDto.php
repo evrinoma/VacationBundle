@@ -4,25 +4,12 @@ namespace Evrinoma\VacationBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\IdTrait;
-use Evrinoma\VacationBundle\Model\ModelInterface;
+use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserApiDto  extends AbstractDto implements UserApiDtoInterface
 {
     use IdTrait;
-
-    /**
-     * @param int|null $id
-     *
-     * @return UserApiDtoInterface
-     */
-    private function setId(?int $id): UserApiDtoInterface
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     public function toDto(Request $request): DtoInterface
     {
@@ -30,8 +17,8 @@ class UserApiDto  extends AbstractDto implements UserApiDtoInterface
 
         if ($class === $this->getClass()) {
 
-            $user      = $request->get(ModelInterface::AUTHOR);
-            $resolver  = $request->get(ModelInterface::RESOLVED_BY);
+            $user      = $request->get(UserApiDtoInterface::AUTHOR);
+            $resolver  = $request->get(UserApiDtoInterface::RESOLVED_BY);
 
             if ($user) {
                 $this->setId($user);

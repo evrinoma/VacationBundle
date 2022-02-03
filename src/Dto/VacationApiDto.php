@@ -5,8 +5,7 @@ namespace Evrinoma\VacationBundle\Dto;
 use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\IdTrait;
-use Evrinoma\VacationBundle\Model\ModelInterface;
+use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
@@ -62,26 +61,14 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
 //endregion Public
 
 //region SECTION: Private
-    /**
-     * @param int|null $id
-     *
-     * @return VacationApiDtoInterface
-     */
-    private function setId(?int $id): VacationApiDtoInterface
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    public function setResolver(UserApiDtoInterface $resolver): VacationApiDtoInterface
+    public function setResolver(UserApiDtoInterface $resolver): DtoInterface
     {
         $this->resolver = $resolver;
 
         return $this;
     }
 
-    private function setStatus(string $status): VacationApiDtoInterface
+    private function setStatus(string $status): DtoInterface
     {
         $this->status = $status;
 
@@ -89,7 +76,7 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
 
     }
 
-    public function setUser(UserApiDtoInterface $user): VacationApiDtoInterface
+    public function setUser(UserApiDtoInterface $user): DtoInterface
     {
         $this->user = $user;
 
@@ -104,8 +91,8 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
 
         if ($class === $this->getClass()) {
 
-            $id     = $request->get(ModelInterface::ID);
-            $status = $request->get(ModelInterface::STATUS);
+            $id     = $request->get(VacationApiDtoInterface::ID);
+            $status = $request->get(VacationApiDtoInterface::STATUS);
 
             if ($id) {
                 $this->setId($id);
@@ -126,13 +113,13 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
     public function genRequestRangeApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $dateStart = $request->get(ModelInterface::DATE_START);
-            $dateEnd   = $request->get(ModelInterface::DATE_END);
+            $dateStart = $request->get(RangeApiDtoInterface::DATE_START);
+            $dateEnd   = $request->get(RangeApiDtoInterface::DATE_END);
             if ($dateStart && $dateEnd) {
                 $newRequest                        = $this->getCloneRequest();
                 $range[DtoInterface::DTO_CLASS]    = RangeApiDto::class;
-                $range[ModelInterface::DATE_START] = $dateStart;
-                $range[ModelInterface::DATE_END]   = $dateEnd;
+                $range[RangeApiDtoInterface::DATE_START] = $dateStart;
+                $range[RangeApiDtoInterface::DATE_END]   = $dateEnd;
                 $newRequest->request->add($range);
 
                 yield $newRequest;
@@ -146,11 +133,11 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
     public function genRequestAuthorApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $author = $request->get(ModelInterface::AUTHOR);
+            $author = $request->get(UserApiDtoInterface::AUTHOR);
             if ($author) {
                 $newRequest                    = $this->getCloneRequest();
                 $user[DtoInterface::DTO_CLASS] = UserApiDto::class;
-                $user[ModelInterface::AUTHOR]  = $author;
+                $user[UserApiDtoInterface::AUTHOR]  = $author;
                 $newRequest->request->add($user);
 
                 yield $newRequest;
@@ -164,11 +151,11 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
     public function genRequestResolvedApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $resolver = $request->get(ModelInterface::RESOLVED_BY);
+            $resolver = $request->get(UserApiDtoInterface::RESOLVED_BY);
             if ($resolver) {
                 $newRequest                        = $this->getCloneRequest();
                 $user[DtoInterface::DTO_CLASS]     = UserApiDto::class;
-                $user[ModelInterface::RESOLVED_BY] = $resolver;
+                $user[UserApiDtoInterface::RESOLVED_BY] = $resolver;
                 $newRequest->request->add($user);
 
                 yield $newRequest;
@@ -207,7 +194,7 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
 
 //region SECTION: Getters/Setters
     /**
-     * @return bool
+     * @return UserApiDtoInterface
      */
     public function getResolver(): UserApiDtoInterface
     {
@@ -215,7 +202,7 @@ class VacationApiDto extends AbstractDto implements VacationApiDtoInterface
     }
 
     /**
-     * @return bool
+     * @return UserApiDtoInterface
      */
     public function getUser(): UserApiDtoInterface
     {

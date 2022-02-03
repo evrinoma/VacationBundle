@@ -3,10 +3,13 @@
 namespace Evrinoma\VacationBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\IdInterface;
 
-interface RangeApiDtoInterface extends DtoInterface
+interface RangeApiDtoInterface extends DtoInterface, IdInterface
 {
 //region SECTION: Public
+    public const DATE_START  = 'vacation_start_date';
+    public const DATE_END    = 'vacation_end_date';
     /**
      * @return bool
      */

@@ -4,11 +4,13 @@ namespace Evrinoma\VacationBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\VacationBundle\Model\ModelInterface;
+use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class RangeApiDto extends AbstractDto implements RangeApiDtoInterface
 {
+    use IdTrait;
+
 //region SECTION: Fields
     private ?\DateTimeImmutable $start = null;
     private ?\DateTimeImmutable $end   = null;
@@ -47,8 +49,8 @@ class RangeApiDto extends AbstractDto implements RangeApiDtoInterface
 
         if ($class === $this->getClass()) {
 
-            $start = $request->get(ModelInterface::DATE_START);
-            $end   = $request->get(ModelInterface::DATE_END);
+            $start = $request->get(RangeApiDtoInterface::DATE_START);
+            $end   = $request->get(RangeApiDtoInterface::DATE_END);
             
             if ($start) {
                 $this->setStart(new \DateTimeImmutable($start));

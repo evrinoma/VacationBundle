@@ -4,7 +4,6 @@ namespace Evrinoma\VacationBundle\Factory;
 
 use Evrinoma\VacationBundle\Dto\VacationApiDtoInterface;
 use Evrinoma\VacationBundle\Entity\Vacation\BaseVacation;
-use Evrinoma\VacationBundle\Model\ModelInterface;
 use Evrinoma\VacationBundle\Model\Vacation\VacationInterface;
 
 final class VacationFactory implements VacationFactoryInterface
